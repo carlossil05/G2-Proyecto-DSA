@@ -16,7 +16,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 # ==============================================================
 # 1. CONEXIÓN A MLFLOW REMOTO (EC2)
 # ==============================================================
-mlflow.set_tracking_uri("http://18.212.99.123:5000")
+mlflow.set_tracking_uri("http://3.214.199.14:5000")
 mlflow.set_experiment("USA-House-Prices")
 
 # ==============================================================
