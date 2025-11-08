@@ -1,4 +1,13 @@
 import mlflow
+
+# Conectar al servidor remoto MLflow (EC2)
+mlflow.set_tracking_uri("http://18.212.99.123:5000")
+
+# Crear o usar un experimento específico
+mlflow.set_experiment("USA-House-Prices")
+
+
+import mlflow
 import mlflow.sklearn
 import pandas as pd
 import numpy as np
@@ -7,6 +16,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from xgboost import XGBRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+
 
 # 1. CARGA DE DATOS
 df = pd.read_csv("data/USAHousingDataset.csv")
