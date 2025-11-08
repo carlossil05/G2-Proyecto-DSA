@@ -1,0 +1,17 @@
+sudo apt update
+
+sudo apt install python3-pip
+
+sudo apt install python3.10-venv -y
+
+python3 -m venv myenv
+
+source myenv/bin/activate
+
+pip install numpy
+
+pip install pandas
+
+pip install scikit-learn
+
+
