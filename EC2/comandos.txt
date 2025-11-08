@@ -1,0 +1,3 @@
+cd /d "G:\Mi unidad\Carlos Silva\MIAD\4304 Despliegue soluciones analiticas\Proyecto\git\EC2"
+
+ssh -i llave-g2-proy.pem ubuntu@18.212.99.123
