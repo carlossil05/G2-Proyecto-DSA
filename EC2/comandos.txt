@@ -2,4 +2,6 @@ cd /d "G:\Mi unidad\Carlos Silva\MIAD\4304 Despliegue soluciones analiticas\Proy
 
 ssh -i llave-g2-proy.pem ubuntu@3.214.199.14
 
+mlflow server -h 0.0.0.0 -p 5000 --allowed-hosts '*' --cors-allowed-origins '*'
+
 ssh -i "C:\Users\Lizt1\OneDrive\Escritorio\U. Andes\5.2. Despliegue de soluciones análiticas\Semana 3\Proyecto DSA\G2-Proyecto-DSA\EC2\llave-g2-proy.pem" ubuntu@3.214.199.14
