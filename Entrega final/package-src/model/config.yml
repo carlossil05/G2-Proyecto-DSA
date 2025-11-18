@@ -1,0 +1,94 @@
+# Nombre del paquete
+package_name: model-house-pricing
+
+# Archivos de datos
+train_data_file: housing_train.csv
+test_data_file: housing_test.csv
+
+# Variables
+# Objetivo
+target: price
+
+features:
+  - bedrooms
+  - bathrooms
+  - sqft_living
+  - sqft_lot
+  - floors
+  - waterfront
+  - view
+  - condition
+  - sqft_above
+  - sqft_basement
+  - yr_built
+  - yr_renovated
+  - city_Algona
+  - city_Auburn
+  - city_Beaux_Arts_Village
+  - city_Bellevue
+  - city_Black_Diamond
+  - city_Bothell
+  - city_Burien
+  - city_Carnation
+  - city_Clyde_Hill
+  - city_Covington
+  - city_Des_Moines
+  - city_Duvall
+  - city_Enumclaw
+  - city_Fall_City
+  - city_Federal_Way
+  - city_Issaquah
+  - city_Kenmore
+  - city_Kent
+  - city_Kirkland
+  - city_Lake_Forest_Park
+  - city_Maple_Valley
+  - city_Medina
+  - city_Mercer_Island
+  - city_Milton
+  - city_Newcastle
+  - city_Normandy_Park
+  - city_North_Bend
+  - city_Pacific
+  - city_Preston
+  - city_Ravensdale
+  - city_Redmond
+  - city_Renton
+  - city_Sammamish
+  - city_SeaTac
+  - city_Seattle
+  - city_Shoreline
+  - city_Skykomish
+  - city_Snoqualmie
+  - city_Snoqualmie_Pass
+  - city_Tukwila
+  - city_Vashon
+  - city_Woodinville
+  - city_Yarrow_Point
+
+# Listas vacías correctamente formateadas
+temp_features:
+  - "none"
+qual_vars:
+  - "none"
+categorical_vars:
+  - "none"
+
+# Diccionario vacío correctamente formateado
+qual_mappings:
+  none: 0
+
+# Pipelines
+pipeline_name: housing_pipe
+pipeline_save_file: model-house-pricing-v
+
+# fracción del conjunto de prueba
+test_size: 0.3
+
+# semilla
+random_state: 0
+
+# hiperparámetros del modelo 
+n_estimators: 100
+learning_rate: 0.1
+max_depth: 5
