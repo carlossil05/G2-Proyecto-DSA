@@ -5,3 +5,14 @@ ssh -i llave-g2-proy.pem ubuntu@3.214.199.14
 mlflow server -h 0.0.0.0 -p 5000 --allowed-hosts '*' --cors-allowed-origins '*'
 
 ssh -i "C:\Users\Lizt1\OneDrive\Escritorio\U. Andes\5.2. Despliegue de soluciones análiticas\Semana 3\Proyecto DSA\G2-Proyecto-DSA\EC2\llave-g2-proy.pem" ubuntu@3.214.199.14
+
+#Correr la API
+source env-tox/bin/activate
+cd house-pricing-api
+tox run -e run
+
+
+#Desplegar tablero con streamlit en otro terminal paralelo
+source env-tox/bin/activate
+cd tablero
+streamlit run dashboard.py --server.port 8501 --server.address 0.0.0.0
