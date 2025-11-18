@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 
-from .config.core import config
-from .pipeline import housing_pipe
-from .processing.data_manager import load_dataset, save_pipeline
+from model.config.core import config
+from model.pipeline import housing_pipe
+from model.processing.data_manager import load_dataset, save_pipeline
 
 
 def run_training() -> None:

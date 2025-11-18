@@ -1,6 +1,6 @@
 import math
 
-import numpy 
+import numpy as np
 
 from model.predict import make_prediction
 
