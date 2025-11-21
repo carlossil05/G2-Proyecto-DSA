@@ -39,37 +39,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ================= TABS=================
-tab1, tab2 = st.tabs(["Mapa", "Predecir precio"])
-
-
-with tab1:
-
-    # ================= MAPA =================
-    st.header("🏙️ Mapa del precio promedio por sqft")
-    st.markdown("En este mapa se puede ver cuáles son las ciudades con los precios de vivienda promedio por pies cuadrados más y menos costosos. Puede navegar a lo largo del mapa, hacer zoom y ver la información de cada ciudad")
-
-    fig = px.scatter_mapbox(
-        df,
-        lat='lat',
-        lon='lon',
-        size='price_per_sqft',
-        color='price_per_sqft',
-        hover_name='city',
-        color_continuous_scale='Viridis',
-        mapbox_style='carto-positron',
-        zoom=7,
-        width=900,
-        height=900,
-    )
-
-    st.plotly_chart(fig, use_container_width=True)
-
-with tab2:
+tab1, tab2, tab3 = st.tabs(["Predecir precio", "Mapa de calor", "Estadísticas descriptivas"])
 
 # =================INGRESO DE INFORMACIÓN =================
-
+with tab1:
     st.header("🔮 Predicción del precio de la vivienda")
-    st.markdown("Ingrese los datos de la vivienda y presione **Predecir Precio**.")
+    st.markdown("Ingrese los datos de la vivienda y presione **Predecir Precio** para estimar el precio de venta de la vivienda.")
+
+    with st.markdown('<div class="big-button">', unsafe_allow_html=True):
+        predict_button = st.button("🚀 Predecir el precio")
 
     col1, col2, col3 = st.columns(3)
 
@@ -95,9 +73,56 @@ with tab2:
         sqft_lot = st.number_input("Lot size (sqft)", 400, 50000, 4000, help="Ingrese el área del lote en pies cuadrados")
         sqft_above = st.number_input("Sqft above", 300, 15000, 1500, help="Ingrese el área en pies cuadrados sin contar el sótano")
         sqft_basement = st.number_input("Sqft basement", 0, 10000, 300, help="Ingrese el área en pies cuadrados del sótano")
+        
+# ================= MAPA =================
+with tab2:
+    st.header("🏙️ Mapa de calor del precio promedio por sqft")
+    st.markdown("En este mapa se puede ver cuáles son las ciudades con los precios de vivienda promedio por pies cuadrados más y menos costosos. Puede navegar a lo largo del mapa, hacer zoom y ver la información de cada ciudad")
+
+    fig = px.scatter_mapbox(
+        df,
+        lat='lat',
+        lon='lon',
+        size='price_per_sqft',
+        color='price_per_sqft',
+        hover_name='city',
+        color_continuous_scale='Viridis',
+        mapbox_style='carto-positron',
+        zoom=7,
+        width=900,
+        height=900,
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+with tab3:
+    st.header("Estadísticas descriptivas")
+    st.markdown("En esta sección se muestran gráficos para visualizar la relación entre el precio de la vivienda y los factores estructurales principales de las viviendas.")
+
+    df_graphs = pd.read_parquet("data_graphs.parquet")
     
-    with st.markdown('<div class="big-button">', unsafe_allow_html=True):
-        predict_button = st.button("🚀 Predecir el precio")
+    # Create a 2-column layout
+    cols = st.columns(2)
+    
+    # List of graphs: (title, x-column, type)
+    graphs = [
+        ("Price vs Year Built", "yr_built", "scatter"),
+        ("Price vs View", "view", "box"),
+        ("Price vs Sqft Above", "sqft_above", "scatter"),
+        ("Price vs Sqft Living", "sqft_living", "scatter"),
+        ("Price vs Bathrooms", "bathrooms", "scatter"),
+        ("Price vs Bedrooms", "bedrooms", "scatter"),
+    ]
+    
+    # Loop through each graph and place in columns
+    for i, (title, x_col, gtype) in enumerate(graphs):
+        col = cols[i % 2]  # alternate columns
+        if gtype == "scatter":
+            fig = px.scatter(df_graphs, x=x_col, y="price", title=title)
+        elif gtype == "box":
+            fig = px.box(df_graphs, x=x_col, y="price", title=title)
+        col.plotly_chart(fig, use_container_width=True)
+
     
 # ================= BOTÓN =================
 if predict_button:
